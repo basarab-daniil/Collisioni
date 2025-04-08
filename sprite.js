@@ -30,7 +30,10 @@ var animatedObject = {
         this.tryX = this.x + this.speedX;
 
         //Prima di spostarmi realmente verifico che non ci siano collisioni
-        this.crashWith(bushObject);
+        if (!this.crashWith(bushObject) && !this.crashWith(crateObject)) {
+            this.x = this.tryX;
+            this.y = this.tryY;
+        }
 
         this.contaFrame++;
         if (this.contaFrame == 3) {
@@ -54,18 +57,16 @@ var animatedObject = {
         // Controllo collisioni con i bordi dello schermo
         if (myleft < 0 || myright > myGameArea.canvas.width ||
             mytop < 0 || mybottom > myGameArea.canvas.height) {
-            return; // Non permettiamo il movimento se uscirebbe dallo schermo
+            return true; // C'è una collisione con i bordi
         }
 
-        //NON HO COLLISIONI SE: Un oggetto è sopra oppure sotto oppure a destra oppure a sinistra dell'altro
-        if ((mybottom < othertop) || (mytop > otherbottom) ||
-            (myright < otherleft) || (myleft > otherright)) {
-            this.x = this.tryX; //Se non ho collisioni sposto realmente l'oggetto
-            this.y = this.tryY;
-        }
-        else //HO COLLISIONI MA PER ORA NON FACCIO NIENTE
-        {
-        }
+        //Ritorna true se c'è una collisione, false se non c'è
+        return !(
+            mybottom < othertop || 
+            mytop > otherbottom || 
+            myright < otherleft || 
+            myleft > otherright
+        );
     },
 
     loadImages: function () {

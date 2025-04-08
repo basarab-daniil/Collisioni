@@ -2,7 +2,8 @@ function startGame() {
     myGameArea.start();
     console.log(animatedObject);
     animatedObject.loadImages();
-    bushObject.loadImages(); // Aggiungiamo questa riga
+    bushObject.loadImages();
+    crateObject.loadImages(); // Aggiungiamo questa riga
 }
 
 var myGameArea = {
@@ -32,7 +33,8 @@ var myGameArea = {
 
 function updateGameArea() {
     myGameArea.clear();
-    myGameArea.drawGameObject(bushObject); // Aggiungiamo questa riga per disegnare il cespuglio
+    myGameArea.drawGameObject(bushObject);
+    myGameArea.drawGameObject(crateObject); // Aggiungiamo questa riga
     animatedObject.update();
     myGameArea.drawGameObject(animatedObject);
 }
