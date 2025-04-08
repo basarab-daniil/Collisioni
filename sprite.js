@@ -50,10 +50,16 @@ var animatedObject = {
         var otherright = otherobj.x + otherobj.width;
         var othertop = otherobj.y;
         var otherbottom = otherobj.y + otherobj.height;
-        var crash = true;
+
+        // Controllo collisioni con i bordi dello schermo
+        if (myleft < 0 || myright > myGameArea.canvas.width ||
+            mytop < 0 || mybottom > myGameArea.canvas.height) {
+            return; // Non permettiamo il movimento se uscirebbe dallo schermo
+        }
 
         //NON HO COLLISIONI SE: Un oggetto è sopra oppure sotto oppure a destra oppure a sinistra dell'altro
-        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+        if ((mybottom < othertop) || (mytop > otherbottom) ||
+            (myright < otherleft) || (myleft > otherright)) {
             this.x = this.tryX; //Se non ho collisioni sposto realmente l'oggetto
             this.y = this.tryY;
         }
