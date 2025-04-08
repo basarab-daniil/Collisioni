@@ -2,6 +2,7 @@ function startGame() {
     myGameArea.start();
     console.log(animatedObject);
     animatedObject.loadImages();
+    bushObject.loadImages(); // Aggiungiamo questa riga
 }
 
 var myGameArea = {
@@ -31,6 +32,7 @@ var myGameArea = {
 
 function updateGameArea() {
     myGameArea.clear();
+    myGameArea.drawGameObject(bushObject); // Aggiungiamo questa riga per disegnare il cespuglio
     animatedObject.update();
     myGameArea.drawGameObject(animatedObject);
 }
